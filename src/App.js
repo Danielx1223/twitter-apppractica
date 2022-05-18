@@ -1,32 +1,35 @@
-import React, { useEffect, useState } from 'react'; // useSTATE para mantener estados dentro app
-import Tweet from './components/tweet'; //use efect para hacer efectos segundarios
-import { getTweets } from './api/tweets';
+import React from 'react'; // useSTATE para mantener estados dentro app
+import { List } from './containers/list';
+import { Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
 
-function App() {
-  const [data, setData] = useState([]);
-
-  async function loadList() {
-    const response = await getTweets();
-    setData(response.data);
-  }
-
-  useEffect(function () {
-    loadList();
-  }, []);
-
+export default function App() {
   return (
-    <div className='container'>
-      {data.map(function (item) {
-        return (
-          <Tweet
-            user={item.userID}
-            date={item.createdAt}
-            content={item.content}
-          />
-        );
-      })}
-    </div>
+    <>
+      <Navbar bg='light' expand='lg'>
+        <Container>
+          <Navbar.Brand href='#'>Twitter</Navbar.Brand>
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='me-auto'>
+              <Nav.Link href='#'>Home</Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link href='#'>Sign Up</Nav.Link>
+              <Nav.Link href='#'>Sign In</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Container>
+        <Row>
+          <Col></Col>
+          <Col xs={15}>
+            <Button variant='primary'>Tweet</Button>
+            <List />
+          </Col>
+          <Col></Col>
+        </Row>
+      </Container>
+    </>
   );
 }
-
-export default App;
