@@ -5,6 +5,7 @@ export async function getTweets() {
   const transformData = json.data.map(function (item) {
     // Para que me muestre sólo estas variables
     return {
+      id: item._id,
       content: item.content,
       date: item.createdAt,
       user: {

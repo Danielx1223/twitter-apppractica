@@ -1,21 +1,33 @@
 import React from 'react'; // useSTATE para mantener estados dentro app
-import { List } from './containers/list';
-import { Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
+import { Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
+import { Routes, Route, Link } from 'react-router-dom';
+import Create from './pages/Create';
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 export default function App() {
   return (
     <>
       <Navbar bg='light' expand='lg'>
         <Container>
-          <Navbar.Brand href='#'>Twitter</Navbar.Brand>
+          <Link href='#' to='/' className='navbar-brand'>
+            Twitter
+          </Link>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
-              <Nav.Link href='#'>Home</Nav.Link>
+              <Link to='/create' className='nav-link'>
+                Create
+              </Link>
             </Nav>
             <Nav>
-              <Nav.Link href='#'>Sign Up</Nav.Link>
-              <Nav.Link href='#'>Sign In</Nav.Link>
+              <Link to='/signUp' className='nav-link'>
+                Sign Up
+              </Link>
+              <Link to='/signIn' className='nav-link'>
+                Sign In
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -24,8 +36,12 @@ export default function App() {
         <Row>
           <Col></Col>
           <Col xs={15}>
-            <Button variant='primary'>Tweet</Button>
-            <List />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/create' element={<Create />} />
+              <Route path='/signIn' element={<SignIn />} />
+              <Route path='/signUp' element={<SignUp />} />
+            </Routes>
           </Col>
           <Col></Col>
         </Row>
