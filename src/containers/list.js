@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'; // useSTATE para mantener estados dentro app
 import Tweet from './../components/tweet'; //use efect para hacer efectos segundarios
 import { getTweets } from './../api/tweets';
+import { useNavigate } from 'react-router-dom'; // Para ir a otra ruta dando click
 import { Spinner } from 'react-bootstrap';
 
 export function List() {
+  const navigate = useNavigate();
   const [data, setData] = useState([]); // Varibalbe de datos
   const [error, setERROR] = useState('');
   const [loading, setLoading] = useState(true);
@@ -42,12 +44,14 @@ export function List() {
       {error && <p>{error.message}</p>}
       {data.map(function (item) {
         return (
-          <Tweet
+          <div
+            onClick={function (event) {
+              navigate(`/tweets/${item.id}`);
+            }}
             key={item.id}
-            user={item.user}
-            date={item.date}
-            content={item.content}
-          />
+          >
+            <Tweet user={item.user} date={item.date} content={item.content} />
+          </div>
         );
       })}
     </div>
