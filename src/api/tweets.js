@@ -31,3 +31,23 @@ export async function getTweet({ id }) {
 
   return transformTweet(json.data);
 }
+
+export async function createTweet(tweet) {
+  const token = localStorage.getItem('token'); // sacamos el token de esa variable
+
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/v1/tweets/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(tweet), // body data type must match "Content-Type" header
+  }); // para poner todos los end points de la api con el ID y sólo muestro lo de un tweet
+  const json = await response.json();
+  if (response.ok) {
+    return transformTweet(json.data);
+  } else {
+    return Promise.reject(json.message);
+  }
+}
