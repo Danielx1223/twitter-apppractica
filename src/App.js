@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react'; // useSTATE para mantener estados dentro app
-import { Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Routes, Route } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
+
+import Header from './containers/Header';
 
 // import Create from './pages/Create';
 // import Home from './pages/Home';
@@ -17,29 +19,7 @@ const SingleTweet = React.lazy(() => import('./pages/SingleTweet'));
 export default function App() {
   return (
     <>
-      <Navbar bg='light' expand='lg'>
-        <Container>
-          <Link href='#' to='/' className='navbar-brand'>
-            Twitter
-          </Link>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='me-auto'>
-              <Link to='/create' className='nav-link'>
-                Create
-              </Link>
-            </Nav>
-            <Nav>
-              <Link to='/signUp' className='nav-link'>
-                Sign Up
-              </Link>
-              <Link to='/signIn' className='nav-link'>
-                Sign In
-              </Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Header />
       <Container>
         <Row>
           <Suspense

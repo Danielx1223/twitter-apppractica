@@ -1,4 +1,4 @@
-export function setSession({ user, token }) {
+export function setSession({ user = {}, token = '' }) {
   localStorage.setItem('token', token);
   localStorage.setItem('user', JSON.stringify(user));
 }

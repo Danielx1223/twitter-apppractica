@@ -16,7 +16,7 @@ export async function signIn({ username, password }) {
   const json = await response.json();
   if (response.ok) {
     setSession({
-      data: json.data,
+      user: json.data,
       token: json.meta.token,
     });
 
