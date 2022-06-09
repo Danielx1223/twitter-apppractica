@@ -1,3 +1,5 @@
+import { setSession } from '../auth';
+
 export async function signIn({ username, password }) {
   // se encarga de recibir username y password para entrar
   const response = await fetch(
@@ -13,6 +15,11 @@ export async function signIn({ username, password }) {
   ); // para poner todos los end points de la api con el ID y sólo muestro lo de un tweet
   const json = await response.json();
   if (response.ok) {
+    setSession({
+      data: json.data,
+      token: json.meta.token,
+    });
+
     return json;
   } else {
     return Promise.reject(json.message);

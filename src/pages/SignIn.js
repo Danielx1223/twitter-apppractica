@@ -13,12 +13,11 @@ export default function SignIn() {
 
     try {
       setError('');
-      const response = await signIn({
+      await signIn({
         username: username.value,
         password: password.value,
       });
-      localStorage.setItem('token', response.meta.token);
-      localStorage.setItem('user', JSON.stringify(response.data)); // recibe objeto de javascript y lo convierte en cadena
+
       navigate('/');
     } catch (err) {
       setError(err);
